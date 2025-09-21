@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, Platform, StatusBar } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import CardV3 from '../components/Card';
 
 const Inicio = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.main}>
             <View style={styles.appBar}>
@@ -14,7 +16,7 @@ const Inicio = () => {
 
             <ScrollView
                 style={{ width: '100%' }}
-                contentContainerStyle={{ alignItems: 'center', paddingBottom: 80 }} 
+                contentContainerStyle={{ alignItems: 'center', paddingBottom: 80 }}
             >
                 <CardV3
 
@@ -40,33 +42,33 @@ const Inicio = () => {
             {/* Navbar */}
             <View style={styles.navbar}>
                 {/* Para ti */}
-                <View style={styles.iconColumn}>
+                <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("ParaTi")}>
                     <FontAwesome name="th-large" size={20} color="#fff" />
                     <Text style={styles.navText}>Para ti</Text>
-                </View>
+                </TouchableOpacity>
                 {/* Productos */}
-                <View style={styles.iconColumn}>
+                <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Inicio")}>
                     <View style={styles.iconRow}>
                         <FontAwesome name="laptop" size={20} color="#fff" style={{ marginRight: 4 }} />
                         <FontAwesome name="mobile" size={20} color="#fff" />
                     </View>
                     <Text style={styles.navText}>Productos</Text>
-                </View>
+                </TouchableOpacity>
                 {/* Conocer más */}
-                <View style={styles.iconColumn}>
+                <TouchableOpacity style={styles.iconColumn}>
                     <FontAwesome name="apple" size={20} color="#fff" />
                     <Text style={styles.navText}>Conocer más</Text>
-                </View>
+                </TouchableOpacity>
                 {/* busqueda */}
-                <View style={styles.iconColumn}>
+                <TouchableOpacity style={styles.iconColumn}>
                     <FontAwesome name="search" size={20} color="#fff" />
                     <Text style={styles.navText}>busqueda</Text>
-                </View>
+                </TouchableOpacity>
                 {/* Bolsa */}
-                <View style={styles.iconColumn}>
+                <TouchableOpacity style={styles.iconColumn}>
                     <FontAwesome name="shopping-bag" size={20} color="#fff" />
                     <Text style={styles.navText}>Bolsa</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -75,7 +77,7 @@ const Inicio = () => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        backgroundColor: '#000', 
+        backgroundColor: '#000',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 44,
     },
     appBar: {
