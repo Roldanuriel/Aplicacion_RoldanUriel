@@ -9,7 +9,7 @@ const Inicio = () => {
     return (
         <View style={styles.main}>
             <View style={styles.appBar}>
-                <FontAwesome name="home" size={20} color="#fff" />
+                
                 <Text style={styles.title}>Para Ti</Text>
                 <View style={{ width: 20 }} />
             </View>
@@ -66,9 +66,9 @@ const Inicio = () => {
                                 <Text style={styles.navText}>busqueda</Text>
                             </TouchableOpacity>
                             {/* Bolsa */}
-                            <TouchableOpacity style={styles.iconColumn}>
-                                <FontAwesome name="shopping-bag" size={20} color="#fff" />
-                                <Text style={styles.navText}>Bolsa</Text>
+                            <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Configuracion")}>
+                                <FontAwesome name="gears" size={20} color="#fff" />
+                                <Text style={styles.navText}>Configuracion</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 44,
     },
     appBar: {
-        flexDirection: 'row',
+        
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: '#0b07077e',
-        paddingVertical: 10,
+        paddingVertical: 15,
         borderTopWidth: 1,
         borderTopColor: '#444',
     },

@@ -10,7 +10,7 @@ export default function CardV3({ titulo, contenido, precio, imagen }) {
                 <Text style={style.cont}>{contenido}</Text>
                 <Text style={style.cont}>{precio}</Text>
                 <TouchableOpacity style={style.botonG}>
-                    <Text style={style.textoBotonG}>Boton</Text>
+                    <Text style={style.textoBotonG}>Ver mas</Text>
                 </TouchableOpacity>
             </View>
         </View>
