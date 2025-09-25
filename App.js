@@ -7,6 +7,7 @@ import Principal from "./src/Pages/Home";
 import Inicio from "./src/Pages/Inicio";
 import Parati from "./src/Pages/Parati";
 import Configuracion from "./src/Configuration/Configuracion";
+import Formulario from "./src/components/Formulario";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,8 @@ export default function App() {
         <Stack.Screen name="ParaTi" component={Parati} />
         <Stack.Screen name="Productos" component={Inicio} />
         <Stack.Screen name="Configuracion" component={Configuracion} />
+        <Stack.Screen name="Formulario" component={Formulario} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

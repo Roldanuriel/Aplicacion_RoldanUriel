@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useReducer} from "react";
+import React, { useState, createContext, useContext, useReducer } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -75,9 +75,9 @@ export default function App() {
           </TouchableOpacity>
 
           {/* Conocer más */}
-          <TouchableOpacity style={styles.iconColumn}>
+          <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Formulario")}>
             <FontAwesome name="apple" size={20} color="#fff" />
-            <Text style={styles.navText}>Conocer más</Text>
+            <Text style={styles.navText}>Inventario</Text>
           </TouchableOpacity>
 
           {/* Búsqueda */}

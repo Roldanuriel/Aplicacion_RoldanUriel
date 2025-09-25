@@ -4,6 +4,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import CardV3 from '../components/Card';
 
+
+
 const Inicio = () => {
     const navigation = useNavigation();
     return (
@@ -56,9 +58,9 @@ const Inicio = () => {
                                 <Text style={styles.navText}>Productos</Text>
                             </TouchableOpacity>
                             {/* Conocer más */}
-                            <TouchableOpacity style={styles.iconColumn}>
+                           <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Formulario")}>
                                 <FontAwesome name="apple" size={20} color="#fff" />
-                                <Text style={styles.navText}>Conocer más</Text>
+                                <Text style={styles.navText}>Inventario</Text>
                             </TouchableOpacity>
                             {/* busqueda */}
                             <TouchableOpacity style={styles.iconColumn}>

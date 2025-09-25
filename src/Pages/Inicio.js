@@ -1,52 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
 import CardV3 from '../components/Card';
 
 const Inicio = () => {
     const navigation = useNavigation();
+    const [productos, setProductos] = useState([]);
+
+    const backendURL = "http://192.168.1.78:3000/productos";
+
+    const fetchProductos = async () => {
+        try {
+            const response = await fetch(backendURL);
+            const data = await response.json();
+            setProductos(data);
+        } catch (error) {
+            console.error("Error al obtener productos:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProductos();
+    }, []);
+
     return (
         <View style={styles.main}>
+            {/* AppBar */}
             <View style={styles.appBar}>
-                
+
                 <Text style={styles.title}>Productos</Text>
                 <View style={{ width: 20 }} />
             </View>
 
+            {/* Contenido */}
             <ScrollView
                 style={{ width: '100%' }}
                 contentContainerStyle={{ alignItems: 'center', paddingBottom: 80 }}
             >
-                <CardV3
-
-                    titulo="IPhone 17 Pro Max"
-                    contenido="Todo mas Pro."
-                    precio="Desde $28,499"
-                    imagen="https://www.apple.com/v/iphone-17-pro/a/images/overview/welcome/hero__bdntboqignj6_xlarge.jpg"
-                />
-                <CardV3
-                    titulo="Iphone Air"
-                    contenido="El iphone mas delgado."
-                    precio="desde $25,999"
-                    imagen="https://www.mastekhw.com/wp-content/uploads/2025/09/iShop-trae-a-Colombia-los-nuevos-iPhone-17-iPhone-17-Pro-y-17-Pro-Max.jpg"
-                />
-                <CardV3
-                    titulo="IPhone 17"
-                    contenido="Espectacolor."
-                    precio="Desde $19,999"
-                    imagen="https://www.apple.com/newsroom/images/2025/09/apple-debuts-iphone-17/article/Apple-iPhone-17-lineup-250909_big.jpg.large_2x.jpg"
-                />
+                {productos.map((prod) => (
+                    <CardV3
+                        key={prod.id}
+                        titulo={prod.titulo}
+                        contenido={prod.descripcion}
+                        precio={`$${prod.precio}`}
+                        imagen={prod.imagen}
+                    />
+                ))}
             </ScrollView>
 
             {/* Navbar */}
             <View style={styles.navbar}>
-                {/* Para ti */}
                 <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("ParaTi")}>
                     <FontAwesome name="th-large" size={20} color="#fff" />
                     <Text style={styles.navText}>Para ti</Text>
                 </TouchableOpacity>
-                {/* Productos */}
+
                 <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Inicio")}>
                     <View style={styles.iconRow}>
                         <FontAwesome name="laptop" size={20} color="#fff" style={{ marginRight: 4 }} />
@@ -54,17 +64,17 @@ const Inicio = () => {
                     </View>
                     <Text style={styles.navText}>Productos</Text>
                 </TouchableOpacity>
-                {/* Conocer más */}
-                <TouchableOpacity style={styles.iconColumn}>
+
+                <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Formulario")}>
                     <FontAwesome name="apple" size={20} color="#fff" />
-                    <Text style={styles.navText}>Conocer más</Text>
+                    <Text style={styles.navText}>Inventario</Text>
                 </TouchableOpacity>
-                {/* busqueda */}
+
                 <TouchableOpacity style={styles.iconColumn}>
                     <FontAwesome name="search" size={20} color="#fff" />
-                    <Text style={styles.navText}>busqueda</Text>
+                    <Text style={styles.navText}>Busqueda</Text>
                 </TouchableOpacity>
-                {/* Bolsa */}
+
                 <TouchableOpacity style={styles.iconColumn} onPress={() => navigation.navigate("Configuracion")}>
                     <FontAwesome name="gears" size={20} color="#fff" />
                     <Text style={styles.navText}>Configuracion</Text>
@@ -82,11 +92,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     appBar: {
-        
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         width: '100%',
         paddingHorizontal: 16,
         paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#444',
     },
     title: {
         color: '#fff',
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderTopWidth: 1,
         borderTopColor: '#444',
-
+        
     },
     iconColumn: {
         alignItems: 'center',
