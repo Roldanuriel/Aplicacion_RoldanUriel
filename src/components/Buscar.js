@@ -1,34 +1,24 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { Switch } from "react-native-paper";
+import { Searchbar } from "react-native-paper"; 
 
 export default function App() {
   const navigation = useNavigation();
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
 
-  const onToggleSwitch = () => setIsDarkMode(!isDarkMode);
+  // estado para Searchbar
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "#000" : "#fff" }, 
-      ]}
-    >
-      {/* Switch para modo oscuro/claro */}
-      <View style={styles.switchContainer}>
-        <Text
-          style={[
-            styles.switchText,
-            { color: isDarkMode ? "#fff" : "#000" }, 
-          ]}
-        >
-          {isDarkMode ? "Modo Oscuro" : "Modo Claro"}
-        </Text>
-        <Switch value={isDarkMode} onValueChange={onToggleSwitch} />
-      </View>
+    <View style={[styles.container]}>
+      {/* Searchbar arriba */}
+      <Searchbar
+        placeholder="Buscar productos..."
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+        style={styles.searchbar}
+      />
 
       {/* NAVBAR */}
       <View style={styles.navbar}>
@@ -68,10 +58,7 @@ export default function App() {
         </TouchableOpacity>
 
         {/* Búsqueda */}
-        <TouchableOpacity
-          style={styles.iconColumn}
-          onPress={() => navigation.navigate("Buscar")}
-        >
+        <TouchableOpacity style={styles.iconColumn}>
           <FontAwesome name="search" size={20} color="#fff" />
           <Text style={styles.navText}>Búsqueda</Text>
         </TouchableOpacity>
@@ -92,41 +79,34 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     alignItems: "center",
-    paddingTop: 100,
+    paddingTop: 50,
+    backgroundColor: "#000", 
   },
-  switchContainer: {
-    alignItems: "center",
-    marginBottom: 50,
-  },
-  switchText: {
-    fontSize: 28,
-    marginBottom: 30,
+  searchbar: {
+    width: "90%",
+    marginBottom: 20,
+    borderRadius: 10,
   },
   navbar: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#0b07077e',
-        paddingVertical: 15,
-        borderTopWidth: 1,
-        borderTopColor: '#444',
-    },
-    iconColumn: {
-        alignItems: 'center',
-    },
-    iconRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    navText: {
-        fontSize: 12,
-        marginTop: 2,
-        color: '#fff',
-    },
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#222",
+    paddingVertical: 10,
+    width: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
+  iconColumn: {
+    alignItems: "center",
+  },
+  iconRow: {
+    flexDirection: "row",
+  },
+  navText: {
+    color: "#fff",
+    fontSize: 12,
+    marginTop: 4,
+  },
 });
+

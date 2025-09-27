@@ -7,11 +7,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Conexión a MySQL
+
 const db = mysql.createConnection({
-  host: "127.0.0.1",   // tu MySQL corre en localhost
-  user: "root",        // cambia si tu usuario es distinto
-  password: "Uriel1985",        // tu contraseña de MySQL
+  host: "127.0.0.1",
+  user: "root",
+  password: "Uriel1985",
   database: "tienda"
 });
 
